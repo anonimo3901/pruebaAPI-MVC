@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Web_MVC</title>
+    @*@Styles.Render("~/Content/css")*@
+    @Styles.Render("~/Content/bootstrap5/css/bootstrap.css")
+    @Styles.Render("~/Content/bootstrap5/css/bootstrap-grid.css")
+    @Styles.Render("~/Content/bootstrap5/css/bootstrap-utilities.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            @*@Html.ActionLink("Web_MVC", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            <span class="navbar-brand">Web-MVC</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    @*<li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { @class = "nav-link" })</li>*@
+                    <li class="nav-item">@Html.ActionLink("Autores", "Index", "Autores", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Libros", "Libros", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+
+                    @*<li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>*@
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Web_MVC</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/Content/bootstrap5/js/bootstrap.js") 
+    @RenderSection("scripts", required: false)
+</body>
+</html>
