@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CODE\\C#\\Prueba_API-MVC\\API\\API\\API.csproj": {}
+    "D:\\CODE\\C#\\Prueba_API-MVC\\Prueba\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\CODE\\C#\\Prueba_API-MVC\\API\\API\\API.csproj": {
+    "D:\\CODE\\C#\\Prueba_API-MVC\\Prueba\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CODE\\C#\\Prueba_API-MVC\\API\\API\\API.csproj",
+        "projectUniqueName": "D:\\CODE\\C#\\Prueba_API-MVC\\Prueba\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\CODE\\C#\\Prueba_API-MVC\\API\\API\\API.csproj",
+        "projectPath": "D:\\CODE\\C#\\Prueba_API-MVC\\Prueba\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Zenzuo\\.nuget\\packages\\",
-        "outputPath": "D:\\CODE\\C#\\Prueba_API-MVC\\API\\API\\obj\\",
+        "outputPath": "D:\\CODE\\C#\\Prueba_API-MVC\\Prueba\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Zenzuo\\AppData\\Roaming\\NuGet\\NuGet.Config",

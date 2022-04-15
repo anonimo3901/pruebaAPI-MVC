@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Zenzuo\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Zenzuo\\.nuget\\packages"
+    ]
+  }
+}

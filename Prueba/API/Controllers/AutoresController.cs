@@ -104,7 +104,7 @@ namespace API.Controllers
                 bool validacion;
                 validacion = validaciones(0, autor.AUNOMBRE, autor.AUFECNAC, autor.AUCIUPRO, autor.AUCORREO, "Post");
 
-                if (validacion != false)
+                if (validacion != true)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Datos incompletos o mal ingresados" });
                 }
@@ -138,7 +138,7 @@ namespace API.Controllers
                 bool validacion;
                 validacion = validaciones(autor.AUCONSECUTIVO, autor.AUNOMBRE, autor.AUFECNAC, autor.AUCIUPRO, autor.AUCORREO, "Put");
 
-                if (validacion != false)
+                if (validacion != true)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Datos incompletos o mal ingresados" });
                 }

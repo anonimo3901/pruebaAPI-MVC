@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using API.Models;
 using Newtonsoft.Json;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace Web_MVC.Controllers
 {
@@ -36,12 +37,27 @@ namespace Web_MVC.Controllers
         }
         public async Task<ActionResult> Post(Autores autor)
         {
-            var url = ConfigurationManager.AppSettings["API"] + "/Autores/Post" + autor;
+            var url = ConfigurationManager.AppSettings["API"] + "/Autores/Post";
             var httpClient = new HttpClient();
+            
+            var json = "[{ " + "\"aunombre\":\"" + autor.AUNOMBRE + "\",\"aufecnac\":\"" + autor.AUFECNAC + "\",\"auciupro\":\"" + autor.AUCIUPRO + "\",\"aucorreo\":\"" + autor.AUCORREO + "\"" + " }]";
 
-            var json = await httpClient.GetStringAsync(url);
-            ViewBag.mensaje = "Guardado con Exito";
+            //var data = JsonSerializer.Serialize<Autores>(post);
 
+            HttpContent content = new StringContent(json, System.Text.Encoding.UTF8, "aplication/json");
+
+
+            var httpResponse = await httpClient.PostAsync(url, content);
+
+            
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                ViewBag.mensaje1 = "Guardado con Exito";
+            }
+            else
+            {
+                ViewBag.mensaje2 = "No guardado";
+            }
             return View("Create", autor);
         }
         #endregion

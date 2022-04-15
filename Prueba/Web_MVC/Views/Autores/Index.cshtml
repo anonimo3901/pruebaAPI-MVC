@@ -9,7 +9,7 @@
         <h2>Autores</h2>
     </div>
     <div class="col-10">
-        @Html.ActionLink("Agregar", "Post", "Autores", new { area = "" }, new { @class = "btn btn-primary" })@*<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAutores">Agregar</button>*@
+        @Html.ActionLink("Agregar", "Create", "Autores", new { area = "" }, new { @class = "btn btn-success" })
     </div>
     @*<div class="col-9">
         <input class="form-control form-control-sm" type="text" placeholder="Buscar" />
@@ -37,7 +37,7 @@
                         <td>@autoresList.AUCIUPRO</td>
                         <td>@autoresList.AUCORREO</td>
                         <td>
-                            
+                            @Html.ActionLink("Editar", "Update", "Autores", new { area = "" }, new { @class = "btn btn-primary" })
                         </td>
                         <td>
                             <button class="btn btn-danger">Eliminar</button>
