@@ -18,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LICONSECUTIVO, "Consecutivo", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LICONSECUTIVO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.LICONSECUTIVO, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.LICONSECUTIVO, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,10 +58,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LIAUTOR, "Autor", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.LIAUTOR, new { htmlAttributes = new { @class = "form-control" } })*@
-                @*new SelectList((List<DepartmentModel>)TempData["deptList"], "deptId", "deptName")      new SelectList(ViewBag.Autores, "AUCONSECUTIVO", "AUNOMBRE")    *@
-                @Html.DropDownListFor(model => model.LIAUTOR, new SelectList((List<Autores>)ViewBag.Autores, "AUCONSECUTIVO", "AUNOMBRE"), htmlAttributes: new { @class = "form-control" })
-                @*@Html.DropDownList("Autores", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.EditorFor(model => model.LIAUTOR, new { htmlAttributes = new { @class = "form-control" } })
 
                 @Html.ValidationMessageFor(model => model.LIAUTOR, "", new { @class = "text-danger" })
             </div>

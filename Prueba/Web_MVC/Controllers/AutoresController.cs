@@ -18,16 +18,31 @@ namespace Web_MVC.Controllers
     {
         string API = ConfigurationManager.AppSettings["API"] + "/Autores";
         #region List-Get
-        public async Task<ActionResult> Index()
+        public async Task<string> List()
         {
             var url = API + "/List";
             var httpClient = new HttpClient();
+            
             var json = await httpClient.GetStringAsync(url);
-            json = json.Substring(27, json.Length - 28);
 
-            List<Autores> autoresList = JsonConvert.DeserializeObject<List<Autores>>(json);
+            if (json.Length > 0)
+            {
+                json = json.Substring(27, json.Length - 28);
+            }
+
+            return json;
+        }
+        public async Task<ActionResult> Index()
+        {
+            List<Autores> autoresList = new List<Autores>();
+            var json = await List();
+            if (json.Length != 0)
+            {
+                autoresList = JsonConvert.DeserializeObject<List<Autores>>(json);
+            }
 
             return View(autoresList);
+
         }
         public async Task<Autores> getAutor(int id)
         {
@@ -118,7 +133,7 @@ namespace Web_MVC.Controllers
             var url = API + "/Delete/" + id;
             var httpClient = new HttpClient();
             var httpResponse = await httpClient.DeleteAsync(url);
-
+            List<Autores> autoresList = new List<Autores>();
 
             if (httpResponse.IsSuccessStatusCode)
             {
@@ -129,8 +144,14 @@ namespace Web_MVC.Controllers
                 ViewBag.mensaje2 = "No Eliminado";
             }
 
+            var json = await List();
+            if (json.Length != 0)
+            {
+                autoresList = JsonConvert.DeserializeObject<List<Autores>>(json);
+            }
 
-            return View("Index");
+            return View("Index", autoresList);
+
         }
         #endregion
 

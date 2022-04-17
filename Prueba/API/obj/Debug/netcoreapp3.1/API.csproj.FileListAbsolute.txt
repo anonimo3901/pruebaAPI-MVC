@@ -95,7 +95,6 @@ D:\CODE\C#\Prueba_API-MVC\Prueba\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\ne
 D:\CODE\C#\Prueba_API-MVC\Prueba\API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 D:\CODE\C#\Prueba_API-MVC\Prueba\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 D:\CODE\C#\Prueba_API-MVC\Prueba\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\System.Windows.Extensions.dll
-D:\CODE\C#\Prueba_API-MVC\Prueba\API\obj\Debug\netcoreapp3.1\API.csproj.AssemblyReference.cache
 D:\CODE\C#\Prueba_API-MVC\Prueba\API\obj\Debug\netcoreapp3.1\API.GeneratedMSBuildEditorConfig.editorconfig
 D:\CODE\C#\Prueba_API-MVC\Prueba\API\obj\Debug\netcoreapp3.1\API.AssemblyInfoInputs.cache
 D:\CODE\C#\Prueba_API-MVC\Prueba\API\obj\Debug\netcoreapp3.1\API.AssemblyInfo.cs
@@ -109,3 +108,4 @@ D:\CODE\C#\Prueba_API-MVC\Prueba\API\obj\Debug\netcoreapp3.1\API.csproj.CopyComp
 D:\CODE\C#\Prueba_API-MVC\Prueba\API\obj\Debug\netcoreapp3.1\API.dll
 D:\CODE\C#\Prueba_API-MVC\Prueba\API\obj\Debug\netcoreapp3.1\API.pdb
 D:\CODE\C#\Prueba_API-MVC\Prueba\API\obj\Debug\netcoreapp3.1\API.genruntimeconfig.cache
+D:\CODE\C#\Prueba_API-MVC\Prueba\API\obj\Debug\netcoreapp3.1\API.csproj.AssemblyReference.cache

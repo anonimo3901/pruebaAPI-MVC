@@ -19,14 +19,28 @@ namespace Web_MVC.Controllers
         //URL de la API tomada de la Key en el archivo de configuracion
         string API = ConfigurationManager.AppSettings["API"] + "/Libros";
         #region List-Get
-        public async Task<ActionResult> Index()
+        public async Task<string> List()
         {
             var url = API + "/List";
             var httpClient = new HttpClient();
-            var json = await httpClient.GetStringAsync(url);
-            json = json.Substring(27, json.Length - 28);
 
-            List<Libros> librosList = JsonConvert.DeserializeObject<List<Libros>>(json);
+            var json = await httpClient.GetStringAsync(url);
+
+            if (json.Length > 0)
+            {
+                json = json.Substring(27, json.Length - 28);
+            }
+
+            return json;
+        }
+        public async Task<ActionResult> Index()
+        {
+            List<Libros> librosList = new List<Libros>();
+            var json = await List();
+            if (json.Length != 0)
+            {
+                librosList = JsonConvert.DeserializeObject<List<Libros>>(json);
+            }
 
             return View(librosList);
         }
@@ -136,6 +150,7 @@ namespace Web_MVC.Controllers
             var httpClient = new HttpClient();
             var httpResponse = await httpClient.DeleteAsync(url);
 
+            List<Libros> librosList = new List<Libros>();
 
             if (httpResponse.IsSuccessStatusCode)
             {
@@ -146,8 +161,13 @@ namespace Web_MVC.Controllers
                 ViewBag.mensaje2 = "No Eliminado";
             }
 
+            var json = await List();
+            if (json.Length != 0)
+            {
+                librosList = JsonConvert.DeserializeObject<List<Libros>>(json);
+            }
 
-            return View("Index");
+            return View("Index", librosList);
         }
         #endregion
 

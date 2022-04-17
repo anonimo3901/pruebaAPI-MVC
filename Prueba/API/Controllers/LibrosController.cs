@@ -27,7 +27,7 @@ namespace API.Controllers
 
             try
             {
-                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, AUNOMBRE AS AUNOMBRE FROM LIBROS JOIN AUTORES ON LIAUTOR = AUCONSECUTIVO ORDER BY LICONSECUTIVO";
+                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, nvl(AUNOMBRE, 'Autor no ligado') AS AUNOMBRE FROM LIBROS LEFT JOIN AUTORES ON LIAUTOR = AUCONSECUTIVO ORDER BY LICONSECUTIVO";
 
                 tbl = conexion.QueryData(sql);
                 if (tbl.Rows.Count > 0)
@@ -49,7 +49,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "No se han encontrado registros" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "No se han encontrado registros" });
                 }
 
             }
@@ -69,7 +69,7 @@ namespace API.Controllers
             Libros libro = new Libros();
             try
             {
-                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, AUNOMBRE AS AUNOMBRE FROM LIBROS JOIN AUTORES ON LIAUTOR = AUCONSECUTIVO ORDER BY LICONSECUTIVO"; 
+                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, nvl(AUNOMBRE, 'Autor no ligado') AS AUNOMBRE FROM LIBROS LEFT JOIN AUTORES ON LIAUTOR = AUCONSECUTIVO ORDER BY LICONSECUTIVO"; 
                 tbl = conexion.QueryData(sql);
                 if (tbl.Rows.Count > 0)
                 {
@@ -91,7 +91,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Libro no encontrado" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Libro no encontrado" });
                 }
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace API.Controllers
 
                 if (validacion != true)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Datos incompletos o mal ingresados" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Datos incompletos o mal ingresados" });
                 }
 
                 sql = "INSERT INTO LIBROS (LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR) VALUES " +
@@ -127,7 +127,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Libro no guardado" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Libro no guardado" });
                 }
             }
             catch (Exception ex)
@@ -150,7 +150,7 @@ namespace API.Controllers
 
                 if (validacion != true)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Datos incompletos o mal ingresados" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Datos incompletos o mal ingresados" });
                 }
 
                 sql = "UPDATE LIBROS SET LITITULO = '" + libro.LITITULO + "', LIANO = '" + libro.LIANO + "',LIGENERO = '" + libro.LIGENERO + "', " +
@@ -163,7 +163,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Libro no encontrado" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Libro no encontrado" });
                 }
             }
             catch (Exception ex)
@@ -190,7 +190,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Libro no encontrado" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Libro no encontrado" });
                 }
             }
             catch (Exception ex)

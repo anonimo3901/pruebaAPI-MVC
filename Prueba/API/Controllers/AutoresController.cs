@@ -47,7 +47,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "No se han encontrado registros" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "No se han encontrado registros" });
                 }
 
             }
@@ -88,7 +88,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Autor no encontrado" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Autor no encontrado" });
                 }
             }
             catch (Exception ex)
@@ -111,7 +111,7 @@ namespace API.Controllers
 
                 if (validacion != true)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Datos incompletos o mal ingresados" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Datos incompletos o mal ingresados" });
                 }
 
                 sql = "INSERT INTO AUTORES (AUNOMBRE, AUFECNAC, AUCIUPRO, AUCORREO) VALUES ('" + autor.AUNOMBRE + "',TO_DATE('" + autor.AUFECNAC + "','MM/dd/YYYY'), " +
@@ -124,7 +124,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Autor no guardado" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Autor no guardado" });
                 }
             }
             catch (Exception ex)
@@ -147,7 +147,7 @@ namespace API.Controllers
 
                 if (validacion != true)
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Datos incompletos o mal ingresados" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Datos incompletos o mal ingresados" });
                 }
 
                 sql = "UPDATE AUTORES SET AUNOMBRE = '" + autor.AUNOMBRE + "', AUFECNAC = TO_DATE('" + autor.AUFECNAC + "', 'MM/dd/YYYY'), AUCIUPRO = '" + autor.AUCIUPRO + "', " +
@@ -160,7 +160,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Autor no encontrado" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Autor no encontrado" });
                 }
             }
             catch (Exception ex)
@@ -187,7 +187,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Autor no encontrado" });
+                    return StatusCode(StatusCodes.Status204NoContent, new { mensaje = "Autor no encontrado" });
                 }
             }
             catch (Exception ex)
