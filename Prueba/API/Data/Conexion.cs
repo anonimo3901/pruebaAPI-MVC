@@ -12,7 +12,7 @@ using System.IO;
 
 namespace API.Data
 {
-   //Clase Conexion para la base de datos Oracle
+   //Conexion a la base de datos de Oracle
    public class Conexion
     {
         private string cadenaSQL;

@@ -16,11 +16,12 @@ namespace Web_MVC.Controllers
 {
     public class LibrosController : Controller
     {
-        string API = ConfigurationManager.AppSettings["API"];
+        //URL de la API tomada de la Key en el archivo de configuracion
+        string API = ConfigurationManager.AppSettings["API"] + "/Libros";
         #region List-Get
         public async Task<ActionResult> Index()
         {
-            var url = API + "/Libros/List";
+            var url = API + "/List";
             var httpClient = new HttpClient();
             var json = await httpClient.GetStringAsync(url);
             json = json.Substring(27, json.Length - 28);
@@ -29,9 +30,10 @@ namespace Web_MVC.Controllers
 
             return View(librosList);
         }
+        //Metodo para ser utilizado tanto en "Get" como envio a la vista "Update"
         public async Task<Libros> getLibro(int id)
         {
-            var url = API + "/Libros/Get/" + id;
+            var url = API + "/Get/" + id;
             var httpClient = new HttpClient();
             var json = await httpClient.GetStringAsync(url);
             json = json.Substring(27, json.Length - 28);
@@ -46,7 +48,121 @@ namespace Web_MVC.Controllers
             return View(libro);
         }
         #endregion
-       
 
+        #region Post
+        public ActionResult Create()
+        {
+            ViewBag.Message = "";
+
+            return View();
+        }
+        public async Task<ActionResult> Post(Libros libro)
+        {
+            var url = API + "/Post";
+            var httpClient = new HttpClient();
+            var data = JsonConvert.SerializeObject(libro, Formatting.Indented);
+            HttpContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await httpClient.PostAsync(url, content);
+
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                ViewBag.mensaje1 = "Guardado con Exito";
+            }
+            else
+            {
+                ViewBag.mensaje2 = "No guardado";
+            }
+
+
+            return View("Create", libro);
+        }
+        #endregion
+
+        #region Put
+        public async Task<ActionResult> Update(int id)
+        {
+
+            //Combo Autores
+            List<SelectListItem> lst = new List<SelectListItem>();
+            List<Autores> autoresList = await ListAutores();
+
+            if (autoresList.Count > 0)
+            {
+                foreach (var autor in autoresList)
+                {
+                    lst.Add(new SelectListItem() { Text = autor.AUCONSECUTIVO.ToString() + " - " +autor.AUNOMBRE.ToString(), Value = autor.AUCONSECUTIVO.ToString() });
+                }
+            }
+            
+
+            ViewBag.Autores = autoresList;
+
+            Libros libro = await getLibro(id);
+
+            ViewBag.Message = "";
+            return View(libro);
+        }
+        public async Task<ActionResult> Put(Libros libro)
+        {
+            var url = API + "/Put";
+            var httpClient = new HttpClient();
+            var data = JsonConvert.SerializeObject(libro, Formatting.Indented);
+            HttpContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
+
+            var httpResponse = await httpClient.PutAsync(url, content);
+
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                ViewBag.mensaje1 = "Actualizado con Exito";
+            }
+            else
+            {
+                ViewBag.mensaje2 = "No Actualizado";
+            }
+
+
+            return View("Update", libro);
+        }
+        #endregion
+
+        #region Delete
+        public async Task<ActionResult> Delete(int id)
+        {
+            ViewBag.Message = "";
+            var url = API + "/Delete/" + id;
+            var httpClient = new HttpClient();
+            var httpResponse = await httpClient.DeleteAsync(url);
+
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                ViewBag.mensaje1 = "Eliminado con Exito";
+            }
+            else
+            {
+                ViewBag.mensaje2 = "No Eliminado";
+            }
+
+
+            return View("Index");
+        }
+        #endregion
+
+        #region methods
+        public async Task<List<Autores>> ListAutores()
+        {
+            var url = ConfigurationManager.AppSettings["API"] + "/Autores/List";
+            var httpClient = new HttpClient();
+            var json = await httpClient.GetStringAsync(url);
+            json = json.Substring(27, json.Length - 28);
+
+            List<Autores> autoresList = JsonConvert.DeserializeObject<List<Autores>>(json);
+
+            return autoresList;
+        }
+        #endregion
     }
 }

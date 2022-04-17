@@ -16,11 +16,11 @@ namespace Web_MVC.Controllers
 {
     public class AutoresController : Controller
     {
-        string API = ConfigurationManager.AppSettings["API"];
+        string API = ConfigurationManager.AppSettings["API"] + "/Autores";
         #region List-Get
         public async Task<ActionResult> Index()
         {
-            var url = API + "/Autores/List";
+            var url = API + "/List";
             var httpClient = new HttpClient();
             var json = await httpClient.GetStringAsync(url);
             json = json.Substring(27, json.Length - 28);
@@ -31,7 +31,7 @@ namespace Web_MVC.Controllers
         }
         public async Task<Autores> getAutor(int id)
         {
-            var url = API + "/Autores/Get/" + id;
+            var url = API + "/Get/" + id;
             var httpClient = new HttpClient();
             var json = await httpClient.GetStringAsync(url);
             json = json.Substring(27, json.Length - 28);
@@ -56,7 +56,7 @@ namespace Web_MVC.Controllers
         }
         public async Task<ActionResult> Post(Autores autor)
         {
-            var url = API + "/Autores/Post";
+            var url = API + "/Post";
             var httpClient = new HttpClient();
             var data = JsonConvert.SerializeObject(autor,Formatting.Indented);
             HttpContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
@@ -89,7 +89,7 @@ namespace Web_MVC.Controllers
         }
         public async Task<ActionResult> Put(Autores autor)
         {
-            var url = API + "/Autores/Put";
+            var url = API + "/Put";
             var httpClient = new HttpClient();
             var data = JsonConvert.SerializeObject(autor, Formatting.Indented);
             HttpContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
@@ -115,7 +115,7 @@ namespace Web_MVC.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             ViewBag.Message = "";
-            var url = API + "/Autores/Delete/" + id;
+            var url = API + "/Delete/" + id;
             var httpClient = new HttpClient();
             var httpResponse = await httpClient.DeleteAsync(url);
 
@@ -133,5 +133,6 @@ namespace Web_MVC.Controllers
             return View("Index");
         }
         #endregion
+
     }
 }

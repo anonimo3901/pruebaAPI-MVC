@@ -27,7 +27,7 @@ namespace API.Controllers
 
             try
             {
-                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, 'NOMBRE' AS AUNOMBRE FROM LIBROS ORDER BY LICONSECUTIVO";
+                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, AUNOMBRE AS AUNOMBRE FROM LIBROS JOIN AUTORES ON LIAUTOR = AUCONSECUTIVO ORDER BY LICONSECUTIVO";
 
                 tbl = conexion.QueryData(sql);
                 if (tbl.Rows.Count > 0)
@@ -69,7 +69,7 @@ namespace API.Controllers
             Libros libro = new Libros();
             try
             {
-                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, 'NOMBRE' AS AUNOMBRE FROM LIBROS ORDER BY LICONSECUTIVO"; 
+                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, AUNOMBRE AS AUNOMBRE FROM LIBROS JOIN AUTORES ON LIAUTOR = AUCONSECUTIVO ORDER BY LICONSECUTIVO"; 
                 tbl = conexion.QueryData(sql);
                 if (tbl.Rows.Count > 0)
                 {

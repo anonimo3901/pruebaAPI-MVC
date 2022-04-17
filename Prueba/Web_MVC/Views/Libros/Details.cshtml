@@ -1,0 +1,65 @@
+﻿@model API.Models.Libros
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="margin-top:20px">Detalle Libro</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Consecutivo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LICONSECUTIVO)
+        </dd>
+
+        <dt>
+            Titulo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LITITULO)
+        </dd>
+
+        <dt>
+            Año
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIANO)
+        </dd>
+
+        <dt>
+            Genero
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIGENERO)
+        </dd>
+
+        <dt>
+            Numero de Paginas
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LINUMPAG)
+        </dd>
+
+        <dt>
+            Autor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AUNOMBRE)
+        </dd>
+
+    </dl>
+</div>
+<div> @Html.ActionLink("Editar", "Update", "Libros", new { id = Model.LICONSECUTIVO }, new { @class = "btn btn-primary" })</div>
+<div style="margin-top:20px">@Html.ActionLink("Volver", "Index", "Libros", new { area = "" }, new { @class = "nav-link" })</div>
+

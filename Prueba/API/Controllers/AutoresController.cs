@@ -197,6 +197,7 @@ namespace API.Controllers
         }
         #endregion
 
+        // Validaciones de datos para los Http Post y Put
         #region Methods
         public bool validaciones(int? AUCONSECUTIVO, string? AUNOMBRE, string? AUFECNAC, string? AUCIUPRO, string? AUCORREO, string? Http)
         {
