@@ -13,6 +13,6 @@ namespace API.Models
         public string LIGENERO { get; set; }
         public int LINUMPAG { get; set; }
         public int LIAUTOR { get; set; }
-
+        public string AUNOMBRE { get; set; }
     }
 }

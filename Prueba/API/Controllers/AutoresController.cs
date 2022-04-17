@@ -18,6 +18,7 @@ namespace API.Controllers
         Conexion conexion = new Conexion();
         string sql = "";
 
+        #region List
         [HttpGet]
         [Route("List")]
         public IActionResult List()
@@ -26,7 +27,7 @@ namespace API.Controllers
 
             try
             {
-                sql = "SELECT * FROM AUTORES";
+                sql = "SELECT AUCONSECUTIVO, AUNOMBRE, TO_CHAR(AUFECNAC,'MM/dd/YYYY') AS AUFECNAC, AUCIUPRO, AUCORREO FROM AUTORES ORDER BY AUCONSECUTIVO";
 
                 tbl = conexion.QueryData(sql);
                 if (tbl.Rows.Count > 0)
@@ -56,7 +57,9 @@ namespace API.Controllers
                 //throw new Exception(ex.Message);
             }
         }
+        #endregion
 
+        #region Get
         [HttpGet]
         [Route("Get/{AUCONSECUTIVO:int}")]
         public IActionResult Get(int AUCONSECUTIVO)
@@ -65,7 +68,7 @@ namespace API.Controllers
             Autores autor = new Autores();
             try
             {
-                sql = "SELECT * FROM AUTORES"; //WHERE AUCONSECUTIVO = " + AUCONSECUTIVO + "
+                sql = "SELECT AUCONSECUTIVO, AUNOMBRE, TO_CHAR(AUFECNAC,'MM/dd/YYYY') AS AUFECNAC, AUCIUPRO, AUCORREO FROM AUTORES"; //WHERE AUCONSECUTIVO = " + AUCONSECUTIVO + "
                 tbl = conexion.QueryData(sql);
                 if (tbl.Rows.Count > 0)
                 {
@@ -93,7 +96,9 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message, response = autor });
             }
         }
+        #endregion
 
+        #region Post
         [HttpPost]
         [Route("Post")]
         public IActionResult Post([FromBody] Autores autor)
@@ -127,7 +132,9 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message });
             }
         }
+        #endregion
 
+        #region Put
         [HttpPut]
         [Route("Put")]
         public IActionResult Put([FromBody] Autores autor)
@@ -161,7 +168,9 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message });
             }
         }
+        #endregion
 
+        #region Delete
         [HttpDelete]
         [Route("Delete/{AUCONSECUTIVO:int}")]
         public IActionResult Delete(int AUCONSECUTIVO)
@@ -186,7 +195,9 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message });
             }
         }
+        #endregion
 
+        #region Methods
         public bool validaciones(int? AUCONSECUTIVO, string? AUNOMBRE, string? AUFECNAC, string? AUCIUPRO, string? AUCORREO, string? Http)
         {
             bool val = true;
@@ -256,5 +267,6 @@ namespace API.Controllers
 
             return val;
         }
+        #endregion
     }
 }

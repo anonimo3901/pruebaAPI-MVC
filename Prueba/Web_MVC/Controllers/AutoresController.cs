@@ -9,15 +9,18 @@ using API.Models;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.Text.RegularExpressions;
+using System.Net;
+using System.IO;
 
 namespace Web_MVC.Controllers
 {
     public class AutoresController : Controller
     {
-        #region Get
+        string API = ConfigurationManager.AppSettings["API"];
+        #region List-Get
         public async Task<ActionResult> Index()
         {
-            var url = ConfigurationManager.AppSettings["API"] + "/Autores/List";
+            var url = API + "/Autores/List";
             var httpClient = new HttpClient();
             var json = await httpClient.GetStringAsync(url);
             json = json.Substring(27, json.Length - 28);
@@ -25,6 +28,22 @@ namespace Web_MVC.Controllers
             List<Autores> autoresList = JsonConvert.DeserializeObject<List<Autores>>(json);
 
             return View(autoresList);
+        }
+        public async Task<Autores> getAutor(int id)
+        {
+            var url = API + "/Autores/Get/" + id;
+            var httpClient = new HttpClient();
+            var json = await httpClient.GetStringAsync(url);
+            json = json.Substring(27, json.Length - 28);
+
+            return JsonConvert.DeserializeObject<Autores>(json);
+
+        }
+        public async Task<ActionResult> Details(int id)
+        {
+            Autores autor = await getAutor(id);
+
+            return View(autor);
         }
         #endregion
 
@@ -37,19 +56,14 @@ namespace Web_MVC.Controllers
         }
         public async Task<ActionResult> Post(Autores autor)
         {
-            var url = ConfigurationManager.AppSettings["API"] + "/Autores/Post";
+            var url = API + "/Autores/Post";
             var httpClient = new HttpClient();
-            
-            var json = "[{ " + "\"aunombre\":\"" + autor.AUNOMBRE + "\",\"aufecnac\":\"" + autor.AUFECNAC + "\",\"auciupro\":\"" + autor.AUCIUPRO + "\",\"aucorreo\":\"" + autor.AUCORREO + "\"" + " }]";
-
-            //var data = JsonSerializer.Serialize<Autores>(post);
-
-            HttpContent content = new StringContent(json, System.Text.Encoding.UTF8, "aplication/json");
-
+            var data = JsonConvert.SerializeObject(autor,Formatting.Indented);
+            HttpContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
 
             var httpResponse = await httpClient.PostAsync(url, content);
 
-            
+
             if (httpResponse.IsSuccessStatusCode)
             {
                 ViewBag.mensaje1 = "Guardado con Exito";
@@ -58,23 +72,66 @@ namespace Web_MVC.Controllers
             {
                 ViewBag.mensaje2 = "No guardado";
             }
+
+            
             return View("Create", autor);
         }
         #endregion
 
         #region Put
-        public async Task<ActionResult> Update()
+        public async Task<ActionResult> Update(int id)
         {
-            var url = ConfigurationManager.AppSettings["API"];
+            
+            Autores autor = await getAutor(id);
+
+            ViewBag.Message = "";
+            return View(autor);
+        }
+        public async Task<ActionResult> Put(Autores autor)
+        {
+            var url = API + "/Autores/Put";
             var httpClient = new HttpClient();
-            var json = await httpClient.GetStringAsync(url + "/Autores/List");
-            json = json.Substring(27, json.Length - 28);
+            var data = JsonConvert.SerializeObject(autor, Formatting.Indented);
+            HttpContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json");
 
-            List<Autores> autoresList = JsonConvert.DeserializeObject<List<Autores>>(json);
+            var httpResponse = await httpClient.PutAsync(url, content);
 
-            return View(autoresList);
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                ViewBag.mensaje1 = "Actualizado con Exito";
+            }
+            else
+            {
+                ViewBag.mensaje2 = "No Actualizado";
+            }
+
+
+            return View("Update", autor);
         }
         #endregion
 
+        #region Delete
+        public async Task<ActionResult> Delete(int id)
+        {
+            ViewBag.Message = "";
+            var url = API + "/Autores/Delete/" + id;
+            var httpClient = new HttpClient();
+            var httpResponse = await httpClient.DeleteAsync(url);
+
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                ViewBag.mensaje1 = "Eliminado con Exito";
+            }
+            else
+            {
+                ViewBag.mensaje2 = "No Eliminado";
+            }
+
+
+            return View("Index");
+        }
+        #endregion
     }
 }

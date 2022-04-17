@@ -128,6 +128,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AutoresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LibrosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,9 +216,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Autores\Index.cshtml" />
     <Content Include="Views\Autores\Create.cshtml" />
+    <Content Include="Views\Autores\Update.cshtml" />
+    <Content Include="Views\Autores\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Libros\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

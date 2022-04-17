@@ -18,6 +18,7 @@ namespace API.Controllers
         Conexion conexion = new Conexion();
         string sql = "";
 
+        #region List
         [HttpGet]
         [Route("List")]
         public IActionResult List()
@@ -26,7 +27,7 @@ namespace API.Controllers
 
             try
             {
-                sql = "SELECT * FROM LIBROS";
+                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, 'NOMBRE' AS AUNOMBRE FROM LIBROS ORDER BY LICONSECUTIVO";
 
                 tbl = conexion.QueryData(sql);
                 if (tbl.Rows.Count > 0)
@@ -40,7 +41,8 @@ namespace API.Controllers
                             LIANO = Convert.ToInt32(row["LIANO"]),
                             LIGENERO = row["LIGENERO"].ToString(),
                             LINUMPAG = Convert.ToInt32(row["LINUMPAG"]),
-                            LIAUTOR = Convert.ToInt32(row["LIAUTOR"])
+                            LIAUTOR = Convert.ToInt32(row["LIAUTOR"]),
+                            AUNOMBRE = row["AUNOMBRE"].ToString()
                         });
                     }
                     return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok", response = listData });
@@ -56,7 +58,9 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message, response = listData });
             }
         }
+        #endregion
 
+        #region Get
         [HttpGet]
         [Route("Get/{LICONSECUTIVO:int}")]
         public IActionResult Get(int LICONSECUTIVO)
@@ -65,7 +69,7 @@ namespace API.Controllers
             Libros libro = new Libros();
             try
             {
-                sql = "SELECT * FROM LIBROS"; 
+                sql = "SELECT LICONSECUTIVO, LITITULO, LIANO, LIGENERO, LINUMPAG, LIAUTOR, 'NOMBRE' AS AUNOMBRE FROM LIBROS ORDER BY LICONSECUTIVO"; 
                 tbl = conexion.QueryData(sql);
                 if (tbl.Rows.Count > 0)
                 {
@@ -78,7 +82,8 @@ namespace API.Controllers
                             LIANO = Convert.ToInt32(row["LIANO"]),
                             LIGENERO = row["LIGENERO"].ToString(),
                             LINUMPAG = Convert.ToInt32(row["LINUMPAG"]),
-                            LIAUTOR = Convert.ToInt32(row["LIAUTOR"])
+                            LIAUTOR = Convert.ToInt32(row["LIAUTOR"]),
+                            AUNOMBRE = row["AUNOMBRE"].ToString()
                         });
                     }
                     libro = listData.Where(item => item.LICONSECUTIVO == LICONSECUTIVO).FirstOrDefault();
@@ -94,7 +99,9 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message, response = libro });
             }
         }
+        #endregion
 
+        #region Post
         [HttpPost]
         [Route("Post")]
         public IActionResult Post([FromBody] Libros libro)
@@ -105,7 +112,7 @@ namespace API.Controllers
                 bool validacion;
                 validacion = validaciones(0, libro.LITITULO, libro.LIANO, libro.LIGENERO, libro.LINUMPAG, libro.LIAUTOR, "Post");
 
-                if (validacion != false)
+                if (validacion != true)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Datos incompletos o mal ingresados" });
                 }
@@ -128,7 +135,9 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message });
             }
         }
+        #endregion
 
+        #region Put
         [HttpPut]
         [Route("Put")]
         public IActionResult Put([FromBody] Libros libro)
@@ -139,7 +148,7 @@ namespace API.Controllers
                 bool validacion;
                 validacion = validaciones(libro.LICONSECUTIVO, libro.LITITULO, libro.LIANO, libro.LIGENERO, libro.LINUMPAG, libro.LIAUTOR, "Put");
 
-                if (validacion != false)
+                if (validacion != true)
                 {
                     return StatusCode(StatusCodes.Status404NotFound, new { mensaje = "Datos incompletos o mal ingresados" });
                 }
@@ -162,7 +171,9 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message });
             }
         }
+        #endregion
 
+        #region Delete
         [HttpDelete]
         [Route("Delete/{LICONSECUTIVO:int}")]
         public IActionResult Delete(int LICONSECUTIVO)
@@ -187,6 +198,9 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = ex.Message });
             }
         }
+        #endregion
+
+        #region Methods
         public bool validaciones(int? LICONSECUTIVO, string? LITITULO, int? LIANO, string? LIGENERO, int? LINUMPAG, int? LIAUTOR, string? Http)
         {
             bool val = true;
@@ -268,5 +282,7 @@ namespace API.Controllers
 
             return val;
         }
+        #endregion
     }
+
 }

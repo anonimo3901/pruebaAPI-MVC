@@ -155,3 +155,4 @@ D:\CODE\C#\Prueba_API-MVC\Prueba\Web_MVC\obj\Debug\Web_MVC.csproj.CoreCompileInp
 D:\CODE\C#\Prueba_API-MVC\Prueba\Web_MVC\obj\Debug\Web_MVC.csproj.CopyComplete
 D:\CODE\C#\Prueba_API-MVC\Prueba\Web_MVC\obj\Debug\Web_MVC.dll
 D:\CODE\C#\Prueba_API-MVC\Prueba\Web_MVC\obj\Debug\Web_MVC.pdb
+D:\CODE\C#\Prueba_API-MVC\Prueba\Web_MVC\obj\Debug\Web_MVC.csproj.AssemblyReference.cache

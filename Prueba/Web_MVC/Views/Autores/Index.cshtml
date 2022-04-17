@@ -3,7 +3,7 @@
     ViewBag.Title = "Autores";
 }
 
-<div class="row justify-content-center">
+<div class="row justify-content-center" style="margin-top:20px">
 
     <div class="col-12 text-center">
         <h2>Autores</h2>
@@ -24,29 +24,40 @@
                     <th>Ciudad de Procedencia</th>
                     <th>Correo</th>
                     <th>Editar</th>
+                    <th>Ver</th>
                     <th>Eliminar</th>
                 </tr>
+
             </thead>
             <tbody class="table-secondary">
                 @foreach (var autoresList in Model)
                 {
-                    <tr>
-                        <td>@autoresList.AUCONSECUTIVO</td>
-                        <td>@autoresList.AUNOMBRE</td>
-                        <td>@autoresList.AUFECNAC</td>
-                        <td>@autoresList.AUCIUPRO</td>
-                        <td>@autoresList.AUCORREO</td>
-                        <td>
-                            @Html.ActionLink("Editar", "Update", "Autores", new { area = "" }, new { @class = "btn btn-primary" })
-                        </td>
-                        <td>
-                            <button class="btn btn-danger">Eliminar</button>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@autoresList.AUCONSECUTIVO</td>
+                    <td>@autoresList.AUNOMBRE</td>
+                    <td>@autoresList.AUFECNAC</td>
+                    <td>@autoresList.AUCIUPRO</td>
+                    <td>@autoresList.AUCORREO</td>
+                    <td>
+                        @Html.ActionLink("Editar", "Update", "Autores", new { id=autoresList.AUCONSECUTIVO }, new { @class = "btn btn-primary" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Ver", "Details", "Autores", new { id = autoresList.AUCONSECUTIVO }, new { @class = "btn btn-info" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "Delete", "Autores", new { id = autoresList.AUCONSECUTIVO }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
                 }
 
             </tbody>
 
         </table>
+        <div class="form-group" style="margin-top:20px">
+            <div class="col-md-offset-2 col-md-10">
+                <font color="green">@ViewBag.mensaje1</font>
+                <font color="red">@ViewBag.mensaje2</font>
+            </div>
+        </div>
     </div>
 </div>
